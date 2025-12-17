@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday SRUJAN❤️</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ff6f91, #ff9671);
+      color: white;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 40px;
+      font-size: 3em;
+    }
+
+    p {
+      font-size: 1.2em;
+    }
+
+    #countdown {
+      font-size: 2em;
+      margin: 20px 0;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 30px;
+      background: white;
+      color: #ff4f81;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    button:hover {
+      background: #ffe6ee;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      color: rgba(255,255,255,0.8);
+      font-size: 20px;
+      animation: floatUp 8s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-110vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    /* Confetti */
+    /* Enhanced Confetti */
+   .confetti {
+    position: absolute;
+    width: 8px;
+    height: 14px;
+    opacity: 0.9;
+    animation-name: confettiFall;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    }
+
+
+@keyframes confettiFall {
+    0% {
+    transform: translateY(-10vh) rotate(0deg);
+}
+    100% {
+    transform: translateY(110vh) rotate(720deg);
+}
+
+100% { transform: translateY(100vh) rotate(360deg); }
+}
+  </style>
+  <audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+</head>
+<body>
+
+  <h1>Happy Birthday SRUJAN 🎂❤️</h1>
+  <p>A small birthday gift from my side✨</p>
+  <p id="loveNote">💌 Click Surprise for love magic!</p>
+
+  <div id="countdown">Loading...</div>
+
+  <button onclick="surprise()">🎉 Surprise 🎉</button>
+
+  <script>
+    /* Countdown to tomorrow */
+    function updateCountdown() {
+      const now = new Date();
+      const tomorrow = new Date();
+      tomorrow.setHours(24, 0, 0, 0);
+
+      const diff = tomorrow - now;
+
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("countdown").innerHTML =
+        `${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    /* Floating hearts generator */
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (20 + Math.random() * 30) + "px";
+      heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 8000);
+    }
+
+    setInterval(createHeart, 500);
+
+    /* Confetti effect */
+    function surprise() {
+      document.getElementById("bgMusic").play();
+      showLoveNote();
+      throwConfetti();
+    }
+
+    function showLoveNote() {
+      const notes = [
+        "You are my favorite person ❤️",
+        "Life is beautiful with you 💕",
+        "I fall for you every day 🌸",
+        "You are my forever ✨",
+        "Stop ragebaiting me 😘",
+        "Let's make more memories together 🌟",
+        "Teach me all the stuff you know 📚",    
+
+      ];
+      document.getElementById("loveNote").innerHTML = notes[Math.floor(Math.random()*notes.length)];
+    }
+
+    function throwConfetti() {
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.backgroundColor =
+          `hsl(${Math.random() * 360}, 100%, 50%)`;
+        confetti.style.animationDuration = (2 + Math.random() * 2) + "s";
+
+        document.body.appendChild(confetti);
+
+        setTimeout(() => {
+          confetti.remove();
+        }, 4000);
+      }
+    }
+  </script>
+
+</body>
+</html>

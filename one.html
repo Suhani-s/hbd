@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Galaxy Portal ✨</title>
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at bottom, #020111 0%, #000000 60%);
+  cursor: none;
+}
+
+/* Starfield */
+.stars {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
+}
+
+.stars span {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  animation: twinkle linear infinite;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Custom cursor */
+.cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #00eaff;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 20px #00eaff;
+}
+
+/* Floating symbols */
+.symbol {
+  position: absolute;
+  color: #00eaff;
+  font-size: 22px;
+  opacity: 0.7;
+  animation: float 12s linear infinite;
+}
+
+@keyframes float {
+  from { transform: translateY(110vh) rotate(0deg); }
+  to { transform: translateY(-10vh) rotate(360deg); }
+}
+
+/* Earth Planet Portal */
+/* Earth Planet Portal (Fixed & Visible) */
+.planet {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 180px;
+  height: 180px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #a8eaff 0%, #1e6fbf 45%, #042a4f 75%);
+  box-shadow: 0 0 80px rgba(0,234,255,0.9);
+  animation: earthRotate 20s linear infinite, pulse 3s infinite alternate;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 5;
+}
+}
+
+/* Fake continents */
+.planet::before {
+  content: '';
+  position: absolute;
+  width: 300%;
+  height: 100%;
+  background: repeating-radial-gradient(
+    circle at 20% 40%,
+    rgba(0,180,120,0.9) 0%,
+    rgba(0,180,120,0.9) 4%,
+    transparent 6%,
+    transparent 12%
+  );
+  animation: continentMove 18s linear infinite;
+}
+
+/* Atmosphere glow */
+.planet::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  box-shadow: 0 0 40px rgba(120,220,255,0.8);
+}
+
+@keyframes earthRotate {
+  from { background-position: 0 0; }
+  to { background-position: 360px 0; }
+}
+
+@keyframes continentMove {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Portal text */
+.label {
+  position: absolute;
+  top: calc(50% + 120px);
+  left: 50%;
+  transform: translateX(-50%);
+  color: #00eaff;
+  letter-spacing: 4px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+<div class="cursor" id="cursor"></div>
+
+<div class="planet" onclick="openPortal()"></div>
+<div class="label">ENTER GALAXY</div>
+
+<script>
+/* Stars */
+const stars = document.getElementById('stars');
+for (let i = 0; i < 200; i++) {
+  const s = document.createElement('span');
+  s.style.left = Math.random() * 100 + 'vw';
+  s.style.top = Math.random() * 100 + 'vh';
+  s.style.animationDuration = (2 + Math.random() * 4) + 's';
+  stars.appendChild(s);
+}
+
+/* Floating symbols */
+const symbols = ['✦','✧','✩','⧫','⌬','⊛'];
+for (let i = 0; i < 25; i++) {
+  const sym = document.createElement('div');
+  sym.className = 'symbol';
+  sym.innerHTML = symbols[Math.floor(Math.random()*symbols.length)];
+  sym.style.left = Math.random() * 100 + 'vw';
+  sym.style.animationDuration = (8 + Math.random()*6) + 's';
+  document.body.appendChild(sym);
+}
+
+/* Cursor follow */
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+});
+
+/* Portal action */
+function openPortal() {
+  document.body.style.transition = '2s';
+  document.body.style.filter = 'brightness(3)';
+  setTimeout(() => {
+    window.location.href = 'website.html'; // replace with your website
+  }, 1500);
+}
+</script>
+
+</body>
+</html>
+
